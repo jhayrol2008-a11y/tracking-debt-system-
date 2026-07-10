@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payments - Bayad Track</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div style="font-size: 1.8rem;">💳</div>
+        <h2>Bayad Track</h2>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html" data-page="dashboard">📊 Dashboard</a></li>
+        <li><a href="customers.html" data-page="customers">👥 Customers</a></li>
+        <li><a href="transactions.html" data-page="transactions">📝 Credit Transactions</a></li>
+        <li><a href="payments.html" data-page="payments" class="active">💰 Payments</a></li>
+        <li><a href="reports.html" data-page="reports">📈 Reports</a></li>
+        <li><a href="#" class="logout-btn" onclick="logout(); return false;">🚪 Logout</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div style="margin-left: 260px; width: calc(100% - 260px);">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-title">
+          <h1>Payment Management</h1>
+          <p>Record and track customer payments.</p>
+        </div>
+        <div class="header-right">
+          <div class="user-profile">
+            <div class="user-avatar">A</div>
+            <div class="user-info">
+              <p class="user-name">Admin</p>
+              <p class="user-role">System Administrator</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Payment Form -->
+        <div class="form-container">
+          <h3 style="margin-bottom: 1.5rem; font-size: 1.1rem;">Record New Payment</h3>
+          <form id="paymentForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="paymentCustomer">Select Customer *</label>
+                <select id="paymentCustomer" required>
+                  <option value="">-- Choose a customer --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="currentBalance">Current Balance</label>
+                <input type="text" id="currentBalance" readonly style="background-color: var(--light-gray);">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="paymentAmount">Payment Amount (₱) *</label>
+                <input type="number" id="paymentAmount" min="0" step="0.01" placeholder="0.00" required>
+              </div>
+              <div class="form-group">
+                <label for="paymentDate">Payment Date *</label>
+                <input type="date" id="paymentDate" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="paymentMethod">Payment Method *</label>
+                <select id="paymentMethod" required>
+                  <option value="">-- Select method --</option>
+                  <option value="Cash">💵 Cash</option>
+                  <option value="Check">📋 Check</option>
+                  <option value="Bank Transfer">🏦 Bank Transfer</option>
+                  <option value="Credit Card">💳 Credit Card</option>
+                  <option value="Online Payment">📱 Online Payment</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="paymentNotes">Notes</label>
+                <input type="text" id="paymentNotes" placeholder="Add any notes about this payment...">
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="reset" class="btn btn-secondary">Clear</button>
+              <button type="submit" class="btn btn-primary">💾 Record Payment</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="search-bar" style="margin-top: 2rem;">
+          <input type="text" class="search-input" id="searchInput" placeholder="Search by payment ID or customer name...">
+          <button class="btn btn-secondary btn-sm" onclick="exportPayments()">📥 Export</button>
+        </div>
+
+        <!-- Payments Table -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3 class="table-title">Payment History</h3>
+          </div>
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Payment ID</th>
+                  <th>Customer Name</th>
+                  <th>Amount</th>
+                  <th>Method</th>
+                  <th>Date</th>
+                  <th>Invoice Ref</th>
+                  <th>Notes</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="paymentsTable">
+                <tr>
+                  <td colspan="8" style="text-align: center; padding: 2rem;">Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/payments.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Bayad Track</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div style="font-size: 1.8rem;">💳</div>
+        <h2>Bayad Track</h2>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html" data-page="dashboard" class="active">📊 Dashboard</a></li>
+        <li><a href="customers.html" data-page="customers">👥 Customers</a></li>
+        <li><a href="transactions.html" data-page="transactions">📝 Credit Transactions</a></li>
+        <li><a href="payments.html" data-page="payments">💰 Payments</a></li>
+        <li><a href="reports.html" data-page="reports">📈 Reports</a></li>
+        <li><a href="#" class="logout-btn" onclick="logout(); return false;">🚪 Logout</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div style="margin-left: 260px; width: calc(100% - 260px);">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-title">
+          <h1>Dashboard</h1>
+          <p>Welcome back, Admin! Here's your business summary.</p>
+        </div>
+        <div class="header-right">
+          <div class="user-profile">
+            <div class="user-avatar">A</div>
+            <div class="user-info">
+              <p class="user-name">Admin</p>
+              <p class="user-role">System Administrator</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Dashboard Cards -->
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Total Receivables</div>
+                <div class="card-value" id="totalReceivables">₱0.00</div>
+              </div>
+              <div class="card-icon blue">💵</div>
+            </div>
+            <div class="card-change positive">↑ All outstanding balances</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Total Collections</div>
+                <div class="card-value" id="totalCollections">₱0.00</div>
+              </div>
+              <div class="card-icon green">✓</div>
+            </div>
+            <div class="card-change positive">↑ Total payments received</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Outstanding Balance</div>
+                <div class="card-value" id="outstandingBalance">₱0.00</div>
+              </div>
+              <div class="card-icon blue">⚠️</div>
+            </div>
+            <div class="card-change negative">Pending collection</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Total Customers</div>
+                <div class="card-value" id="totalCustomers">0</div>
+              </div>
+              <div class="card-icon green">👥</div>
+            </div>
+            <div class="card-change positive">Active customers</div>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <h3 class="chart-title">Monthly Collections</h3>
+            <div class="chart-container">
+              <canvas id="monthlyChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3 class="chart-title">Paid vs Unpaid Accounts</h3>
+            <div class="chart-container">
+              <canvas id="paidUnpaidChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3 class="table-title">Recent Transactions</h3>
+            <a href="transactions.html" class="btn btn-primary btn-sm">View All</a>
+          </div>
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Customer Name</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recentTransactionsTable">
+                <tr>
+                  <td colspan="5" style="text-align: center; padding: 2rem;">Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recent Payments -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3 class="table-title">Recent Payments</h3>
+            <a href="payments.html" class="btn btn-primary btn-sm">View All</a>
+          </div>
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Payment ID</th>
+                  <th>Customer Name</th>
+                  <th>Amount</th>
+                  <th>Method</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="recentPaymentsTable">
+                <tr>
+                  <td colspan="5" style="text-align: center; padding: 2rem;">Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
